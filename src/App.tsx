@@ -12,7 +12,7 @@ type WordCategories = {
 
 const App: React.FC = () => {
     const [gameStarted, setGameStarted] = useState(false);
-    const [selectedCategory, setSelectedCategory] = useState<keyof WordCategories>('');
+    const [selectedCategory, setSelectedCategory] = useState<keyof WordCategories>('tecnologia');
     const [selectedCategoryWords, setSelectedCategoryWords] = useState<string[]>([]);
 
     const wordCategories: WordCategories = {
@@ -73,9 +73,8 @@ const App: React.FC = () => {
         setSelectedCategoryWords(wordCategories[randomCategory]);
     }, []);
 
-    const startGame = (category: keyof WordCategories) => {
-        setSelectedCategory(category);
-        setSelectedCategoryWords(wordCategories[category]);
+    const startGame = (category: string) => { // Cambio aquí
+        setSelectedCategory(category as keyof WordCategories); // Cambio aquí
         setGameStarted(true);
     };
 

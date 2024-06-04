@@ -20,7 +20,7 @@ const Hangman: React.FC<HangmanProps> = ({ words }) => {
     const [inputValue, setInputValue] = useState("");
     const { incrementWinCount, incrementLoseCount } = useContext(StatsContext);
 
-    const displayWord = selectedWord.split("").map((letter, index) => {
+    const displayWord = selectedWord.split("").map((letter) => {
         if (guessedLetters.includes(letter)) {
             return letter;
         } else {
