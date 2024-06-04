@@ -1,0 +1,70 @@
+.game {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: -0vh;
+    margin-top: -100px;
+}
+
+.game p {
+    margin: 10px 0;
+}
+
+.game input {
+    padding: 8px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 50px;
+    text-align: center;
+}
+
+.game button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 20px;
+}
+
+.game button:hover {
+    background-color: #0056b3;
+}
+
+.game .hangman-message {
+    margin-top: 20px;
+}
+
+.game .hangman-word {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.game .hangman-button {
+    margin-top: 20px;
+}
+
+.game .win-message {
+    color: green;
+}
+
+.game .lose-message {
+    color: red;
+}
+
+.game .hangman-image img {
+    width: 200px;
+    height: 200px;
+}
+
+.errorContainer {
+    display: fixed;
+    justify-content: center;
+    align-items: center;
+    margin-top: -100px;
+    
+}
