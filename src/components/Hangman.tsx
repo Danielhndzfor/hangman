@@ -9,25 +9,16 @@ import Hangman5 from "../img/hangman5.png";
 import Hangman6 from "../img/hangman6.png";
 import Hangman7 from "../img/hangman.png";
 
-
 interface HangmanProps {
-    tecnologia: string;
-    profesiones: string;
-    paises: string;
-    frutas: string;
+    words: string[];
 }
 
-const Hangman: React.FC<HangmanProps> = ({
-    tecnologia,
-    profesiones,
-    paises,
-    frutas,
-}) => {
-    const [selectedWord, setSelectedWord] = useState(tecnologia);
+const Hangman: React.FC<HangmanProps> = ({ words }) => {
+    const [selectedWord, setSelectedWord] = useState(words[0]);
     const [guessedLetters, setGuessedLetters] = useState<string[]>([]);
     const [errorCount, setErrorCount] = useState(0);
     const [inputValue, setInputValue] = useState("");
-    const { incrementWinCount, incrementLoseCount } = useContext(StatsContext); // Obtener las funciones del contexto
+    const { incrementWinCount, incrementLoseCount } = useContext(StatsContext);
 
     const displayWord = selectedWord.split("").map((letter, index) => {
         if (guessedLetters.includes(letter)) {
@@ -59,17 +50,15 @@ const Hangman: React.FC<HangmanProps> = ({
     };
 
     const restartGame = () => {
-        const categories = [tecnologia, profesiones, paises, frutas];
-        const newWord = categories[Math.floor(Math.random() * categories.length)];
+        const newWord = words[Math.floor(Math.random() * words.length)];
         setSelectedWord(newWord);
         setGuessedLetters([]);
         setErrorCount(0);
 
-        // Actualizar los stats
         if (displayWord.join("") === selectedWord) {
-            incrementWinCount(); // Incrementar el contador de juegos ganados
+            incrementWinCount();
         } else {
-            incrementLoseCount(); // Incrementar el contador de juegos perdidos
+            incrementLoseCount();
         }
     };
 
@@ -114,7 +103,7 @@ const Hangman: React.FC<HangmanProps> = ({
             {(displayWord.join("") === selectedWord || errorCount > 5) && (
                 <div>
                     <button className="hangman-button" onClick={restartGame}>
-                        Select New Word
+                        Seleccionar Nueva Palabra
                     </button>
                 </div>
             )}
@@ -122,10 +111,10 @@ const Hangman: React.FC<HangmanProps> = ({
             {displayWord.join("") === selectedWord && (
                 <p className="hangman-message">¡Ganaste!</p>
             )}
-            
         </div>
     );
 };
 
 export default Hangman;
+
 

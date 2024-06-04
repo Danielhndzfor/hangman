@@ -1,27 +1,16 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import App from './App.tsx'
-import { createBrowserRouter, RouterProvider } from 'react-router-dom'
-import Stats from './components/Stats.tsx'
-import { StatsProvider } from './components/StatsContext.tsx'
+import React from 'react';
+import ReactDOM from 'react-dom';
+import App from './App.tsx';
+import { BrowserRouter as Router } from 'react-router-dom'; // Importa BrowserRouter
+import { StatsProvider } from './components/StatsContext.tsx';
 
-const router = createBrowserRouter([
-  {
-    path: '/',
-    element: <App />
-  },
-  {
-    path: '/stats',
-    element: <Stats />
-  }
-])
-
-ReactDOM.createRoot(document.getElementById('root')!).render(
+ReactDOM.render(
   <React.StrictMode>
     <StatsProvider>
-      <RouterProvider router={router}>
+      <Router>
         <App />
-      </RouterProvider>
+      </Router>
     </StatsProvider>
-  </React.StrictMode>
-)
+  </React.StrictMode>,
+  document.getElementById('root')
+);

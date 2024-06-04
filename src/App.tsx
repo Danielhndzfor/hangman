@@ -2,13 +2,20 @@ import React, { useState, useEffect } from 'react';
 import Hangman from './components/Hangman';
 import Welcome from './components/Welcome';
 
+// Define el tipo para las categorías y palabras
+type WordCategories = {
+    tecnologia: string[];
+    profesiones: string[];
+    paises: string[];
+    frutas: string[];
+};
 
 const App: React.FC = () => {
     const [gameStarted, setGameStarted] = useState(false);
-    const [selectedCategory, setSelectedCategory] = useState('');
+    const [selectedCategory, setSelectedCategory] = useState<keyof WordCategories>('');
     const [selectedCategoryWords, setSelectedCategoryWords] = useState<string[]>([]);
 
-    const wordCategories = {
+    const wordCategories: WordCategories = {
         tecnologia: [
             "computadora",
             "teléfono",
@@ -60,13 +67,13 @@ const App: React.FC = () => {
     };
 
     useEffect(() => {
-        const categories = Object.keys(wordCategories);
+        const categories = Object.keys(wordCategories) as (keyof WordCategories)[];
         const randomCategory = categories[Math.floor(Math.random() * categories.length)];
         setSelectedCategory(randomCategory);
         setSelectedCategoryWords(wordCategories[randomCategory]);
     }, []);
 
-    const startGame = (category: string) => {
+    const startGame = (category: keyof WordCategories) => {
         setSelectedCategory(category);
         setSelectedCategoryWords(wordCategories[category]);
         setGameStarted(true);
@@ -78,18 +85,14 @@ const App: React.FC = () => {
                 <Welcome category={selectedCategory} startGame={startGame} />
             </div>
             {gameStarted && (
-                <Hangman
-                    tecnologia={selectedCategoryWords[0]}
-                    profesiones={selectedCategoryWords[1]}
-                    paises={selectedCategoryWords[2]}
-                    frutas={selectedCategoryWords[3]}
-                />
+                <Hangman words={selectedCategoryWords} />
             )}
         </div>
     );
 };
 
 export default App;
+
 
 
 
